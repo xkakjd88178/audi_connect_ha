@@ -188,7 +188,7 @@ class AudiService:
             #"fuelStatus",
             #"honkAndFlash",
             #"hybridCarAuxiliaryHeating",
-            #"lvBattery",
+            "lvBattery",
             "measurements",
             #"oilLevel",
             #"readiness",

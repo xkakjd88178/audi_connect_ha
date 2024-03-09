@@ -405,12 +405,12 @@ class AudiConnectVehicle:
             #await self.call_update(self.update_vehicle_shortterm, 3)
             #info = "longterm"
             #await self.call_update(self.update_vehicle_longterm, 3)
-            info = "position"
-            await self.call_update(self.update_vehicle_position, 3)
+            #info = "position"
+            #await self.call_update(self.update_vehicle_position, 3)
             #info = "climater"
             #await self.call_update(self.update_vehicle_climater, 3)
-            #info = "charger"
-            #await self.call_update(self.update_vehicle_charger, 3)
+            info = "charger"
+            await self.call_update(self.update_vehicle_charger, 3)
             #info = "preheater"
             #await self.call_update(self.update_vehicle_preheater, 3)
             # Return True on success, False on error
@@ -669,11 +669,11 @@ class AudiConnectVehicle:
             raise
         except ClientResponseError as resp_exception:
             if resp_exception.status == 403 or resp_exception.status == 502:
-                #_LOGGER.error(
-                #    "support_charger set to False: {status}".format(
-                #        status=resp_exception.status
-                #    )
-                #)
+                _LOGGER.error(
+                   "support_charger set to False: {status}".format(
+                       status=resp_exception.status
+                   )
+                )
                 self.support_charger = False
             else:
                 self.log_exception_once(
