@@ -477,7 +477,9 @@ class AudiConnectVehicle:
             return
 
         try:
+            _LOGGER.debug("Attempting to update vehicle position for VIN: %s", self._vehicle.vin)  # Log before making the request
             resp = await self._audi_service.get_stored_position(self._vehicle.vin)
+            _LOGGER.debug("Received response for vehicle position: %s", resp)  # Log the response (consider redacting sensitive info)
             if resp is not None:
                 self._vehicle.state["position"] = {
                     "latitude": resp["data"]["lat"],
@@ -489,6 +491,7 @@ class AudiConnectVehicle:
         except TimeoutError:
             raise
         except ClientResponseError as resp_exception:
+            _LOGGER.error("Error updating vehicle position for VIN: %s, Status: %s", self._vehicle.vin, resp_exception.status)  # Log the error status
             if resp_exception.status == 403 or resp_exception.status == 502:
                 # _LOGGER.error(
                 #    "support_position set to False: {status}".format(
@@ -496,6 +499,8 @@ class AudiConnectVehicle:
                 #    )
                 # )
                 self.support_position = False
+            elif resp_exception.status == 401:  # Handle 401 specifically
+                _LOGGER.error("Unauthorized access while updating vehicle position. Check credentials or token expiration for VIN: %s", self._vehicle.vin)
             # If error is 204 is returned, the position is currently not available
             elif resp_exception.status != 204:
                 self.log_exception_once(
