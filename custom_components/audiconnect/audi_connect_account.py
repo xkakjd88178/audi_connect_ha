@@ -405,8 +405,8 @@ class AudiConnectVehicle:
             #await self.call_update(self.update_vehicle_shortterm, 3)
             #info = "longterm"
             #await self.call_update(self.update_vehicle_longterm, 3)
-            info = "position"
-            await self.call_update(self.update_vehicle_position, 3)
+            #info = "position"
+            #await self.call_update(self.update_vehicle_position, 3)
             #info = "climater"
             #await self.call_update(self.update_vehicle_climater, 3)
             #info = "charger"
