@@ -173,7 +173,7 @@ class AudiService:
 
     async def get_stored_vehicle_data(self, vin: str):
         JOBS2QUERY = {
-            "access",
+            #"access",
             #"activeVentilation",
             #"auxiliaryHeating",
             #"batteryChargingCare",
@@ -188,8 +188,8 @@ class AudiService:
             #"fuelStatus",
             #"honkAndFlash",
             #"hybridCarAuxiliaryHeating",
-            "lvBattery",
-            #"measurements",
+            #"lvBattery",
+            "measurements",
             #"oilLevel",
             #"readiness",
             #"userCapabilities",
