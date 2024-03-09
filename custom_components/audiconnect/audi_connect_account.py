@@ -477,9 +477,16 @@ class AudiConnectVehicle:
             return
 
         try:
+            # Before making the request, log the attempt.
             _LOGGER.debug("Attempting to update vehicle position for VIN: %s", self._vehicle.vin)  # Log before making the request
+            
+            # Make the request.
             resp = await self._audi_service.get_stored_position(self._vehicle.vin)
+            
+            # After receiving the response, log the status code and potentially the body (carefully, to avoid sensitive data).
             _LOGGER.debug("Received response for vehicle position: %s", resp)  # Log the response (consider redacting sensitive info)
+            
+            # Assuming `resp` is the actual data since we don't have the structure of `get_stored_position` response.
             if resp is not None:
                 self._vehicle.state["position"] = {
                     "latitude": resp["data"]["lat"],
@@ -492,6 +499,7 @@ class AudiConnectVehicle:
             raise
         except ClientResponseError as resp_exception:
             _LOGGER.error("Error updating vehicle position for VIN: %s, Status: %s", self._vehicle.vin, resp_exception.status)  # Log the error status
+            _LOGGER.debug(f"Received response for vehicle position: Status: {resp.status}, Body: {await resp.text()}")  # After the response
             if resp_exception.status == 403 or resp_exception.status == 502:
                 # _LOGGER.error(
                 #    "support_position set to False: {status}".format(
