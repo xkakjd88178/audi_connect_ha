@@ -401,18 +401,18 @@ class AudiConnectVehicle:
             self._no_error = True
             info = "statusreport"
             await self.call_update(self.update_vehicle_statusreport, 3)
-            info = "shortterm"
-            await self.call_update(self.update_vehicle_shortterm, 3)
-            info = "longterm"
-            await self.call_update(self.update_vehicle_longterm, 3)
+            #info = "shortterm"
+            #await self.call_update(self.update_vehicle_shortterm, 3)
+            #info = "longterm"
+            #await self.call_update(self.update_vehicle_longterm, 3)
             info = "position"
             await self.call_update(self.update_vehicle_position, 3)
-            info = "climater"
-            await self.call_update(self.update_vehicle_climater, 3)
+            #info = "climater"
+            #await self.call_update(self.update_vehicle_climater, 3)
             #info = "charger"
             #await self.call_update(self.update_vehicle_charger, 3)
-            info = "preheater"
-            await self.call_update(self.update_vehicle_preheater, 3)
+            #info = "preheater"
+            #await self.call_update(self.update_vehicle_preheater, 3)
             # Return True on success, False on error
             return self._no_error
         except Exception as exception:
