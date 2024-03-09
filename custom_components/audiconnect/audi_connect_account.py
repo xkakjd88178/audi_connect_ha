@@ -490,11 +490,11 @@ class AudiConnectVehicle:
             raise
         except ClientResponseError as resp_exception:
             if resp_exception.status == 403 or resp_exception.status == 502:
-                #_LOGGER.error(
-                #    "support_position set to False: {status}".format(
-                #        status=resp_exception.status
-                #    )
-                #)
+                _LOGGER.error(
+                   "support_position set to False: {status}".format(
+                       status=resp_exception.status
+                   )
+                )
                 self.support_position = False
             # If error is 204 is returned, the position is currently not available
             elif resp_exception.status != 204:
